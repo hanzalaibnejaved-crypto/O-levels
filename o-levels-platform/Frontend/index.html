@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanzala | O-Levels Learning Platform</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-content">
+                <div class="loading-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Hanzala</span>
+                </div>
+                <div class="loading-spinner"></div>
+                <p>Loading your learning experience...</p>
+            </div>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="app-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <div class="logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span class="logo-text">Hanzala</span>
+                    </div>
+                    <button class="sidebar-toggle" id="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <div class="nav-label">Main</div>
+                        <a href="#dashboard" class="nav-item active" data-route="dashboard">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#subjects" class="nav-item" data-route="subjects">
+                            <i class="fas fa-book-open"></i>
+                            <span>Subjects</span>
+                        </a>
+                        <a href="#test-maker" class="nav-item" data-route="test-maker">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Test Maker</span>
+                        </a>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-label">Progress</div>
+                        <a href="#progress" class="nav-item" data-route="progress">
+                            <i class="fas fa-chart-line"></i>
+                            <span>My Progress</span>
+                        </a>
+                        <a href="#resources" class="nav-item" data-route="resources">
+                            <i class="fas fa-folder"></i>
+                            <span>Resources</span>
+                        </a>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-label">Account</div>
+                        <a href="#profile" class="nav-item" data-route="profile">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <div class="user-profile">
+                        <div class="user-avatar" id="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name" id="user-name">Guest User</div>
+                            <div class="user-role">Student</div>
+                        </div>
+                    </div>
+                    <button class="logout-btn" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Top Header -->
+                <header class="main-header">
+                    <div class="header-left">
+                        <h1 class="page-title" id="page-title">Dashboard</h1>
+                        <div class="breadcrumb" id="breadcrumb">
+                            <span>Home</span>
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Dashboard</span>
+                        </div>
+                    </div>
+                    
+                    <div class="header-right">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search resources..." id="global-search">
+                        </div>
+                        
+                        <div class="header-actions">
+                            <button class="header-btn" id="notifications-btn">
+                                <i class="fas fa-bell"></i>
+                                <span class="notification-badge">3</span>
+                            </button>
+                            <button class="header-btn" id="theme-toggle">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Content Views -->
+                <div class="content-views">
+                    <!-- Dashboard View -->
+                    <div id="dashboard-view" class="content-view active">
+                        <div class="welcome-banner">
+                            <div class="welcome-content">
+                                <h1 class="welcome-title">Welcome back, <span id="welcome-user">Student</span>! 👋</h1>
+                                <p class="welcome-subtitle">Continue your O-Levels preparation with personalized resources and tests</p>
+                                <button class="btn btn-primary" onclick="app.router.navigate('subjects')">
+                                    <i class="fas fa-rocket"></i>
+                                    Start Learning
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="quick-stats">
+                            <div class="quick-stat">
+                                <div class="quick-stat-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="quick-stat-number" id="total-subjects">7</div>
+                                <div class="quick-stat-label">Subjects</div>
+                            </div>
+                            <div class="quick-stat">
+                                <div class="quick-stat-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="quick-stat-number" id="total-resources">156</div>
+                                <div class="quick-stat-label">Resources</div>
+                            </div>
+                            <div class="quick-stat">
+                                <div class="quick-stat-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="quick-stat-number" id="progress-percentage">42%</div>
+                                <div class="quick-stat-label">Overall Progress</div>
+                            </div>
+                            <div class="quick-stat">
+                                <div class="quick-stat-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="quick-stat-number" id="study-time">18h</div>
+                                <div class="quick-stat-label">Study Time</div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-2">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Recent Activity</h3>
+                                    <p class="card-subtitle">Your latest learning sessions</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="activity-list" id="recent-activity">
+                                        <!-- Activity items will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Top Subjects</h3>
+                                    <p class="card-subtitle">Based on your progress</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="subjects-mini-list" id="top-subjects">
+                                        <!-- Top subjects will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subjects View -->
+                    <div id="subjects-view" class="content-view">
+                        <div class="view-header">
+                            <h2>All Subjects</h2>
+                            <p>Choose a subject to access learning materials</p>
+                        </div>
+                        <div class="subjects-grid" id="subjects-grid">
+                            <!-- Subject cards will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Subject Detail View -->
+                    <div id="subject-detail-view" class="content-view">
+                        <div class="subject-detail-header" id="subject-detail-header">
+                            <!-- Subject header will be loaded here -->
+                        </div>
+                        <div class="resources-tabs">
+                            <button class="tab-btn active" data-tab="notes">
+                                <i class="fas fa-file-alt"></i> Notes
+                            </button>
+                            <button class="tab-btn" data-tab="videos">
+                                <i class="fas fa-play-circle"></i> Videos
+                            </button>
+                            <button class="tab-btn" data-tab="questions">
+                                <i class="fas fa-question-circle"></i> Practice Questions
+                            </button>
+                            <button class="tab-btn" data-tab="past-papers">
+                                <i class="fas fa-paste"></i> Past Papers
+                            </button>
+                        </div>
+                        <div class="resources-content">
+                            <div class="resource-section active" id="notes-content">
+                                <div class="resource-grid" id="notes-grid">
+                                    <!-- Notes will be loaded here -->
+                                </div>
+                            </div>
+                            <div class="resource-section" id="videos-content">
+                                <div class="resource-grid" id="videos-grid">
+                                    <!-- Videos will be loaded here -->
+                                </div>
+                            </div>
+                            <div class="resource-section" id="questions-content">
+                                <div class="resource-grid" id="questions-grid">
+                                    <!-- Questions will be loaded here -->
+                                </div>
+                            </div>
+                            <div class="resource-section" id="past-papers-content">
+                                <div class="resource-grid" id="past-papers-grid">
+                                    <!-- Past papers will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Test Maker View -->
+                    <div id="test-maker-view" class="content-view">
+                        <div class="view-header">
+                            <h2>Create Custom Test</h2>
+                            <p>Generate personalized tests based on your needs</p>
+                        </div>
+                        
+                        <div class="test-maker-container">
+                            <div class="test-maker-steps">
+                                <div class="test-step active" id="step-1">
+                                    <div class="step-circle">1</div>
+                                    <div class="step-label">Subject</div>
+                                </div>
+                                <div class="test-step" id="step-2">
+                                    <div class="step-circle">2</div>
+                                    <div class="step-label">Paper</div>
+                                </div>
+                                <div class="test-step" id="step-3">
+                                    <div class="step-circle">3</div>
+                                    <div class="step-label">Difficulty</div>
+                                </div>
+                                <div class="test-step" id="step-4">
+                                    <div class="step-circle">4</div>
+                                    <div class="step-label">Marks</div>
+                                </div>
+                            </div>
+
+                            <div class="test-form-container">
+                                <form id="test-maker-form">
+                                    <!-- Step 1: Subject Selection -->
+                                    <div class="form-step active" id="step1-form">
+                                        <div class="form-group">
+                                            <label class="form-label">Select Subject</label>
+                                            <div class="option-grid" id="subject-options">
+                                                <!-- Subject options will be loaded here -->
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-secondary" disabled>Previous</button>
+                                            <button type="button" class="btn btn-primary" id="next-to-step2">Next</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 2: Paper Selection -->
+                                    <div class="form-step" id="step2-form">
+                                        <div class="form-group">
+                                            <label class="form-label">Select Paper</label>
+                                            <div class="option-grid" id="paper-options">
+                                                <div class="option-card">
+                                                    <input type="radio" name="paper" value="1" id="paper1">
+                                                    <label class="option-label" for="paper1">Paper 1</label>
+                                                </div>
+                                                <div class="option-card">
+                                                    <input type="radio" name="paper" value="2" id="paper2">
+                                                    <label class="option-label" for="paper2">Paper 2</label>
+                                                </div>
+                                                <div class="option-card">
+                                                    <input type="radio" name="paper" value="both" id="paper-both">
+                                                    <label class="option-label" for="paper-both">Both Papers</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-secondary" id="back-to-step1">Previous</button>
+                                            <button type="button" class="btn btn-primary" id="next-to-step3">Next</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 3: Difficulty Selection -->
+                                    <div class="form-step" id="step3-form">
+                                        <div class="form-group">
+                                            <label class="form-label">Select Difficulty Level</label>
+                                            <div class="option-grid" id="difficulty-options">
+                                                <div class="option-card">
+                                                    <input type="radio" name="difficulty" value="easy" id="difficulty-easy">
+                                                    <label class="option-label" for="difficulty-easy">Easy</label>
+                                                </div>
+                                                <div class="option-card">
+                                                    <input type="radio" name="difficulty" value="medium" id="difficulty-medium">
+                                                    <label class="option-label" for="difficulty-medium">Medium</label>
+                                                </div>
+                                                <div class="option-card">
+                                                    <input type="radio" name="difficulty" value="hard" id="difficulty-hard">
+                                                    <label class="option-label" for="difficulty-hard">Hard</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-secondary" id="back-to-step2">Previous</button>
+                                            <button type="button" class="btn btn-primary" id="next-to-step4">Next</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 4: Marks Selection -->
+                                    <div class="form-step" id="step4-form">
+                                        <div class="form-group">
+                                            <label class="form-label" for="total-marks">Total Marks</label>
+                                            <input type="number" class="form-control" id="total-marks" min="10" max="100" value="50" placeholder="Enter total marks">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Question Types</label>
+                                            <div class="option-grid">
+                                                <div class="option-card">
+                                                    <input type="checkbox" name="question-type" value="mcq" id="type-mcq" checked>
+                                                    <label class="option-label" for="type-mcq">Multiple Choice</label>
+                                                </div>
+                                                <div class="option-card">
+                                                    <input type="checkbox" name="question-type" value="short" id="type-short" checked>
+                                                    <label class="option-label" for="type-short">Short Answer</label>
+                                                </div>
+                                                <div class="option-card">
+                                                    <input type="checkbox" name="question-type" value="long" id="type-long">
+                                                    <label class="option-label" for="type-long">Long Answer</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-secondary" id="back-to-step3">Previous</button>
+                                            <button type="submit" class="btn btn-primary">Generate Test</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress View -->
+                    <div id="progress-view" class="content-view">
+                        <div class="view-header">
+                            <h2>My Progress</h2>
+                            <p>Track your learning journey and achievements</p>
+                        </div>
+                        
+                        <div class="progress-stats">
+                            <div class="stat-card primary">
+                                <div class="stat-number" id="overall-progress">42%</div>
+                                <div class="stat-label">Overall Completion</div>
+                            </div>
+                            <div class="stat-card secondary">
+                                <div class="stat-number" id="total-hours">18</div>
+                                <div class="stat-label">Study Hours</div>
+                            </div>
+                            <div class="stat-card accent">
+                                <div class="stat-number" id="tests-taken">7</div>
+                                <div class="stat-label">Tests Completed</div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Subject Progress</h3>
+                                <p class="card-subtitle">Your performance across all subjects</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="progress-list" id="subject-progress-list">
+                                    <!-- Subject progress will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile View -->
+                    <div id="profile-view" class="content-view">
+                        <div class="view-header">
+                            <h2>My Profile</h2>
+                            <p>Manage your account and preferences</p>
+                        </div>
+                        
+                        <div class="grid grid-2">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Personal Information</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form id="profile-form">
+                                        <div class="form-group">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="profile-name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="profile-email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Grade Level</label>
+                                            <select class="form-control" id="profile-grade">
+                                                <option value="O-Level">O-Level</option>
+                                                <option value="A-Level">A-Level</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Account Settings</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="settings-list">
+                                        <div class="setting-item">
+                                            <div class="setting-info">
+                                                <h4>Dark Mode</h4>
+                                                <p>Switch between light and dark themes</p>
+                                            </div>
+                                            <label class="switch">
+                                                <input type="checkbox" id="dark-mode-toggle">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="setting-item">
+                                            <div class="setting-info">
+                                                <h4>Email Notifications</h4>
+                                                <p>Receive updates about your progress</p>
+                                            </div>
+                                            <label class="switch">
+                                                <input type="checkbox" id="email-notifications" checked>
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Authentication Modal -->
+        <div id="auth-modal" class="modal">
+            <div class="modal-content auth-modal">
+                <div class="auth-container">
+                    <div class="auth-header">
+                        <h2>Welcome to EduMaster Pro</h2>
+                        <p>Sign in to access your O-Levels resources</p>
+                    </div>
+                    
+                    <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label class="form-label">Username or Email</label>
+                            <input type="text" class="form-control" id="login-username" placeholder="Enter your username or email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
+                        </button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="#" id="show-register">Sign up here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
